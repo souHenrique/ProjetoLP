@@ -65,3 +65,5 @@ while True:
                     break
                 else:
                     print("Opção inválida, tente novamente.")
+    elif menuPrincipal == 4:
+        break
