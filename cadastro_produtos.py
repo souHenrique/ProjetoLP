@@ -1,56 +1,51 @@
-#Nesse aqui eu só mexi mesmo na questão da exclusão e da alteração também. Detalhe que tá tudo bem engessado, você precisa seguir uma única linha pra poder fazer o código funcionar, ele não vai tratar exceções
+#Alterado para cada um ter sua própria função.
 
-def cadastro_produtos():
+listaProdutos = []
 
-    listaProdutos = []
+def cadastrarProdutos():
+    produto = []
 
-    while True:
+    nomeProduto = str(input("Digite qual o produto: ")).strip()
+    produto.append(nomeProduto)
 
-        print(10 * "==", "CADASTRO DE PRODUTOS", 10 * "==")
-        print("1. Adicionar;\n2. Consultar;\n3. Alterar;\n4. Excluir;\n5. Voltar ao Menu de Cadastros;")
-        cadastroProdutos = int(input("Selecione a sua opção: "))
+    quantidadeProdutos = int(input("Digite a quantidade em estoque: "))
+    produto.append(quantidadeProdutos)
 
-        if cadastroProdutos == 1:
-            nomeProduto = str(input("Digite a descrição: ")).strip()
-            listaProdutos.append(nomeProduto)
-            quantidadeProdutos = int(input("Digite o saldo em estoque: "))
-            listaProdutos.append(quantidadeProdutos)
-            precoProduto = float(input("Digite o preço de venda:"))
-            listaProdutos.append(precoProduto)
+    precoProduto = float(input("Digite o preço de venda: R$ "))
+    produto.append(precoProduto)
 
-        elif cadastroProdutos == 2:
-            if len(listaProdutos) <= 0:
-                print("Não há produto cadastrado.")
-            else:
-                for pos, prod in enumerate(listaProdutos):
-                    print(f"Produto {pos + 1}: {prod}")
+    listaProdutos.append(produto)
 
-        elif cadastroProdutos == 3:
-            alterar_produto = input("Digite o nome do Produto para alterar o cadastro: ")
-            if alterar_produto in listaProdutos:
-                indice_produto = listaProdutos.index(alterar_produto)
-                del listaProdutos [indice_produto:indice_produto + 3]
-                nova_descricaoProduto = input("Digite a nova descrição do produto: ")
-                listaProdutos.append(nova_descricaoProduto)
-                novo_saldoEstoque = input("Digite o novo saldo em estoque: ")
-                listaProdutos.append(novo_saldoEstoque)
-                novo_Preco = input("Digite o novo preço de venda: ")
-                listaProdutos.append(novo_Preco)
-                print("Cadastro alterado com sucesso.")
-            else:
-                print("O Produto digitado não está nos cadastros.")
+def consultarProdutos():
+    tamanho = len(listaProdutos) / 3
+    if tamanho <= 0:
+        print("Não há produto cadastrado.")
+    else:
+        for pos, prod in enumerate(listaProdutos):
+            print(f"Produto {pos + 1}\n")
+            print(f"Produto: {prod[0]}\nQuantidade em estoque: {prod[1]}\nPreço unitário: R$ {prod[2]}")
+            print(20 * "==")
 
-        elif cadastroProdutos == 4:
-            excluir_produto = input("Digite o nome do produto para excluir o cadastro: ")
-            if excluir_produto in listaProdutos:
-                indice_produto = listaProdutos.index(excluir_produto)
-                del listaProdutos [indice_produto:indice_produto + 3]
-                print("Cadastro removido com sucesso.")
-            else:
-                print("O produto digitado não está na lista.")
+def alterarProdutos():
+    alterar_produto = input("Digite o nome do Produto para alterar o cadastro: ")
+    if alterar_produto in listaProdutos:
+        indice_produto = listaProdutos.index(alterar_produto)
+        del listaProdutos [indice_produto:indice_produto + 3]
+        nova_descricaoProduto = input("Digite a nova descrição do produto: ")
+        listaProdutos.append(nova_descricaoProduto)
+        novo_saldoEstoque = input("Digite o novo saldo em estoque: ")
+        listaProdutos.append(novo_saldoEstoque)
+        novo_Preco = input("Digite o novo preço de venda: ")
+        listaProdutos.append(novo_Preco)
+        print("Cadastro alterado com sucesso.")
+    else:
+        print("O Produto digitado não está nos cadastros.")
 
-        elif cadastroProdutos == 5:
-            return
-
-        else:
-            print("Opção inválida, tente novamente.")
+def excluirProdutos():
+    excluir_produto = input("Digite o nome do produto para excluir o cadastro: ")
+    if excluir_produto in listaProdutos:
+        indice_produto = listaProdutos.index(excluir_produto)
+        del listaProdutos [indice_produto:indice_produto + 3]
+        print("Cadastro removido com sucesso.")
+    else:
+        print("O produto digitado não está na lista.")
