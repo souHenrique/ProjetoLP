@@ -3,7 +3,7 @@
 listaFornecedores = []
 
 def cadastrarFornecedores():
-    nomeFornecedor = str(input("Qual o nome do(a) cliente? ")).strip()
+    nomeFornecedor = str(input("Qual o nome do(a) fornecedor? ")).strip()
     listaFornecedores.append(nomeFornecedor)
 
 def consultarFornecedores():

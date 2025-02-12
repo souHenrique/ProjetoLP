@@ -1,9 +1,9 @@
 #Alterado para cada um ter sua própria função.
 
 listaProdutos = []
+produto = []
 
 def cadastrarProdutos():
-    produto = []
 
     nomeProduto = str(input("Digite qual o produto: ")).strip()
     produto.append(nomeProduto)
@@ -14,6 +14,9 @@ def cadastrarProdutos():
     precoProduto = float(input("Digite o preço de venda: R$ "))
     produto.append(precoProduto)
 
+    fornecedorProduto = str(input("Digite o fornecedor do produto: "))
+    produto.append(fornecedorProduto)
+
     listaProdutos.append(produto)
 
 def consultarProdutos():
@@ -23,7 +26,7 @@ def consultarProdutos():
     else:
         for pos, prod in enumerate(listaProdutos):
             print(f"Produto {pos + 1}\n")
-            print(f"Produto: {prod[0]}\nQuantidade em estoque: {prod[1]}\nPreço unitário: R$ {prod[2]}")
+            print(f"Produto: {prod[0]}\nQuantidade em estoque: {prod[1]}\nPreço unitário: R$ {prod[2]}\nFornecedor: {prod[3]}")
             print(20 * "==")
 
 def alterarProdutos():

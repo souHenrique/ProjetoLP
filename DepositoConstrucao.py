@@ -1,6 +1,7 @@
 import cadastro_clientes
 import cadastro_fornecedores
 import cadastro_produtos
+import pdv
 
 while True:
     print(10 * "==", "MENU PRINCIPAL", 10 * "==")
@@ -96,6 +97,9 @@ while True:
             #Impede que o programa fique preso no loop, quebrando o menu de cadastros
             if menuCadastro == 4:
                 break
+
+    elif menuPrincipal == 2:
+        pdv.realizar_venda()
 
     #Quebra o loop do MENU
     elif menuPrincipal == 4:

@@ -1,97 +1,108 @@
-listaClientes = []
-listaProdutos = []
-    
+import cadastro_clientes
+import cadastro_produtos
+
 def realizar_venda():
 
-#Contador para totalizar o valor a receber na venda    
-
+    #Contador para totalizar o valor a receber na venda
     valor_total_venda = 0
+    contador = 0
 
-#Deixei as listas como variáveis globais para o código inteiro acessar. Não sei como vai funcionar quando modularizar
-
-    global listaClientes
-    global listaProdutos
-
-#Lista para listar os produtos da venda. Toda vez que finalizar uma venda ela será limpa para adicionar uma nova venda
-
+    #Lista para listar os produtos da venda. Toda vez que finalizar uma venda ela será limpa para adicionar uma nova venda
+    item_comprado = []
     resumo_venda = []
 
     nome_cliente_venda = input("Digite o nome do cliente: ")
 
-#No geral, no caso da identificação do produto e do cliente na venda, coloquei as opções para cadastrar na hora, caso não haja cadastro. Pra não precisar voltar para a tela inicial de cadastro. Então basicamente se trata de condições, laços e manipulação de lista.
-
-    if nome_cliente_venda in listaClientes:
+    #No geral, no caso da identificação do produto e do cliente na venda, coloquei as opções para cadastrar na hora, caso não haja cadastro. Pra não precisar voltar para a tela inicial de cadastro. Então basicamente se trata de condições, laços e manipulação de lista.
+    if nome_cliente_venda in cadastro_clientes.listaClientes:
         print(f"{nome_cliente_venda} está cadastrado. Seguindo...")
 
     else:
         print("O cliente digitado não está na lista.")
         cadastro_cliente_venda = input("Digite o nome do cliente para cadastrar: ")
-        listaClientes.append(cadastro_cliente_venda)
+        cadastro_clientes.listaClientes.append(cadastro_cliente_venda)
         print("Cadastro realizado com sucesso.")
 
-        while True:
-        
-            adicionar_pedido = int(input("Deseja continuar a venda [1 - SIM / 2 - NÃO]: "))
+    #Ainda falta concluir, está multiplicando os itens cadastrados na litas (repetidos)
+    while True:
+        adicionar_pedido = int(input("Deseja continuar a venda [1 - SIM / 2 - NÃO]: "))
 
-            if adicionar_pedido == 1:
+        if adicionar_pedido == 1:
 
-                nome_produto_venda = input("Digite o produto: ")
-                quantidade_produto_venda = int(input("Digite a quantidade: "))
+            nome_produto_venda = input("Digite o produto: ")
+            quantidade_produto_venda = int(input("Digite a quantidade: "))
 
-                if nome_produto_venda in listaProdutos:
+            for prod in cadastro_produtos.listaProdutos:
+                for item in prod:
+                    if nome_produto_venda == item:
+                        contador += 1
+                        item_comprado.append(nome_produto_venda)
+                        item_comprado.append(quantidade_produto_venda)
+                        item_comprado.append(prod[2])
+                        item_comprado.append(prod[3])
+                        resumo_venda.append(item_comprado)
+                        print(resumo_venda)
+                        print("Produto adicionado a venda com sucesso.")
 
-                    resumo_venda.append(nome_produto_venda)
-                    resumo_venda.append(quantidade_produto_venda)
+            if contador == 0:
 
-                    indice_produto_cadastrado = listaProdutos.index(nome_produto_venda)
+                print("O produto digitado não está cadastrado.")
+                cadastro_produto_venda = input("Digite o nome do produto para cadastrar: ")
+                cadastro_produtos.produto.append(cadastro_produto_venda)
 
-                    for c in range(indice_produto_cadastrado, len(listaProdutos), 3):
+                quantidadeProdutos = int(input("Digite a quantidade em estoque: "))
+                cadastro_produtos.produto.append(quantidadeProdutos)
 
-                        resumo_venda.append(listaProdutos[c])
-                        valor_total_item = listaProdutos[c] * quantidade_produto_venda
-                        valor_total_venda += valor_total_item
+                precoProduto = float(input("Digite o preço de venda: R$ "))
+                cadastro_produtos.produto.append(precoProduto)
 
-                    print("Produto adicionado a venda com sucesso.")
+                fornecedorProduto = str(input("Digite o nome do fornecedor do produto: "))
+                cadastro_produtos.produto.append(fornecedorProduto)
 
-                else:
-                    print("O produto digitado não está cadastrado.")
-                    cadastro_produto_venda = input("Digite o nome do produto para cadastrar: ")
-                    listaProdutos.append(cadastro_produto_venda)
-                    quantidadeProdutos = int(input("Digite o saldo em estoque: "))
-                    listaProdutos.append(quantidadeProdutos)
-                    precoProduto = float(input("Digite o preço de venda:"))
-                    listaProdutos.append(precoProduto)
-                    print("Cadastro realizado com sucesso.")
-                    
-                    resumo_venda.append(cadastro_produto_venda)
-                    resumo_venda.append(quantidade_produto_venda)
+                cadastro_produtos.listaProdutos.append(cadastro_produtos.produto)
 
-                    indice_produto = listaProdutos.index(cadastro_produto_venda)
+                print("Cadastro realizado com sucesso.")
 
-                    for c in range(indice_produto + 2, len(listaProdutos), 3):
+                for prod in cadastro_produtos.listaProdutos:
+                    for item in prod:
+                        if nome_produto_venda == item:
+                            contador = 0
+                            item_comprado.append(cadastro_produto_venda)
+                            item_comprado.append(quantidadeProdutos)
+                            item_comprado.append(precoProduto)
+                            item_comprado.append(fornecedorProduto)
+                            resumo_venda.append(item_comprado)
+                            print(resumo_venda)
 
-                        resumo_venda.append(listaProdutos[c])
-                        valor_total_item = listaProdutos[c] * quantidade_produto_venda
-                        valor_total_venda += valor_total_item
+                print("Produto adicionado a venda com sucesso.")
 
-                    print("Produto adicionado a venda com sucesso.")
+        #Ainda não está conseguindo mostrar os itens corretamente
+        elif adicionar_pedido == 2:
 
-            elif adicionar_pedido == 2:
+            if len(resumo_venda) <= 0:
+                print("Nenhum produto foi comprado.")
+
+            else:
 
                 print(f"Aqui está os itens que {nome_cliente_venda} deseja comprar: ")
 
-                for c in range(0, len(resumo_venda), 3):
+                for venda in resumo_venda:
+                    print(f"{venda[0]}")
+
+                '''for c in range(0, len(resumo_venda), 3):
 
                     bloco_listado = resumo_venda[c:c+3]
                     listagem_venda = "     --     " .join(map(str, bloco_listado))
-                    print(listagem_venda)
+                    print(listagem_venda)'''
 
                 print(f"Valor total da Compra: {valor_total_venda}")
 
                 print("FORMAS DE PAGAMENTO PARA FINALIZAR A VENDA: ")
                 print("1 - DINHEIRO\n 2 - PIX\n 3 - CARTÃO DE CRÉDITO\n 4- CARTÃO DE DÉBITO")
-                
+
                 pagamento = int(input("Digite a forma de pagamento desejada: "))
+
+                forma_de_pagamento = ""
 
                 if pagamento == 1:
                     forma_de_pagamento = 'DINHEIRO'
@@ -107,6 +118,3 @@ def realizar_venda():
                 resumo_venda.clear()
 
                 break
-
-realizar_venda()
-
