@@ -1,5 +1,3 @@
-#Alterado para cada um ter sua própria função.
-
 listaProdutos = []
 produto = []
 
@@ -20,6 +18,7 @@ def cadastrarProdutos():
     listaProdutos.append(produto)
 
 def consultarProdutos():
+    print(30 * "==")
     tamanho = len(listaProdutos) / 3
     if tamanho <= 0:
         print("Não há produto cadastrado.")
@@ -27,7 +26,7 @@ def consultarProdutos():
         for pos, prod in enumerate(listaProdutos):
             print(f"Produto {pos + 1}\n")
             print(f"Produto: {prod[0]}\nQuantidade em estoque: {prod[1]}\nPreço unitário: R$ {prod[2]}\nFornecedor: {prod[3]}")
-            print(20 * "==")
+            print(30 * "==")
 
 def alterarProdutos():
     alterar_produto = input("Digite o nome do Produto para alterar o cadastro: ")

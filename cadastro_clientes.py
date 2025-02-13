@@ -5,11 +5,13 @@ def cadastrarCliente():
     listaClientes.append(nomeCliente)
 
 def consultarCliente():
+    print(30 * "==")
     if len(listaClientes) <= 0:
         print("Não há cliente cadastrado.")
     else:
         for pos, cl in enumerate(listaClientes):
             print(f"Cliente {pos + 1}: {cl}")
+        print(30 * "==")
 
 def alterarCliente():
     alterar_cliente = input("Digite o nome do cliente para alterar o cadastro: ")

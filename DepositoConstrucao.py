@@ -2,6 +2,7 @@ import cadastro_clientes
 import cadastro_fornecedores
 import cadastro_produtos
 import pdv
+import relatorios
 
 while True:
     print(10 * "==", "MENU PRINCIPAL", 10 * "==")
@@ -9,17 +10,15 @@ while True:
     menuPrincipal = int(input("Selecione a sua opção: "))
 
     if menuPrincipal == 1:
-
         while True:
 
             print(10 * "==", "CADASTROS", 10 * "==")
             print("1. Clientes;\n2. Produtos;\n3. Fornecedores;\n4. Voltar ao Menu Principal;")
             menuCadastro = int(input("Selecione qual cadastro deseja realizar: "))
 
-            # Está chamando cada função de cadastro (clientes, produtos e fornecedores)
             while True:
-                if menuCadastro == 1:
 
+                if menuCadastro == 1:
                     print(10 * "==", "CADASTRO DE CLIENTES", 10 * "==")
                     print("1. Adicionar;\n2. Consultar;\n3. Alterar;\n4. Excluir;\n5. Voltar ao Menu de Cadastros;")
                     cadastroClientes = int(input("Selecione a sua opção: "))
@@ -43,7 +42,6 @@ while True:
                         print("Opção inválida, tente novamente.")
 
                 elif menuCadastro == 2:
-
                     print(10 * "==", "CADASTRO DE PRODUTOS", 10 * "==")
                     print("1. Adicionar;\n2. Consultar;\n3. Alterar;\n4. Excluir;\n5. Voltar ao Menu de Cadastros;")
                     cadastroProdutos = int(input("Selecione a sua opção: "))
@@ -67,7 +65,6 @@ while True:
                         print("Opção inválida, tente novamente.")
 
                 elif menuCadastro == 3:
-
                     print(10 * "==", "CADASTRO DE FORNECEDORES", 10 * "==")
                     print("1. Adicionar;\n2. Consultar;\n3. Alterar;\n4. Excluir;\n5. Voltar ao Menu de Cadastros;")
                     cadastroFornecedores = int(input("Selecione a sua opção: "))
@@ -99,10 +96,35 @@ while True:
                 break
 
     elif menuPrincipal == 2:
-        pdv.realizar_venda()
+        pdv.verificarClienteVenda()
+
+        while True:
+            adicionar_pedido = int(input("Deseja continuar a venda [1 - SIM / 2 - NÃO]: "))
+
+            if adicionar_pedido == 1:
+                pdv.adicionaPedido()
+
+            elif adicionar_pedido == 2:
+                pdv.verificaCompra()
+                if len(pdv.resumo_venda) <= 0:
+                    break
+                pdv.finalizaCompra()
+                break
+
+    elif menuPrincipal == 3:
+        print(10 * "==", "RELATÓRIO", 10 * "==")
+        print("1 - FORNECEDORES: \n2 - VENDAS: \n3 - SAIDA DE PRODUTOS: Ranque de saida dos produtos durante as vendas")
+        menuRelatorio = int(input("Digite a sua opção: "))
+
+        if menuRelatorio == 1:
+            relatorios.relatorioFornecedores()
+
+        if menuRelatorio == 2:
+            relatorios.relatorioVendas()
 
     #Quebra o loop do MENU
     elif menuPrincipal == 4:
+        print("PROGRAMA ENCERRADO...")
         break
 
     else:

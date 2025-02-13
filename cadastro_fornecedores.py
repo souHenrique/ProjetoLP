@@ -1,5 +1,3 @@
-# Muito semelhante ao cadastro do cliente
-
 listaFornecedores = []
 
 def cadastrarFornecedores():
