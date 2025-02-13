@@ -1,3 +1,5 @@
+import cadastro_fornecedores
+
 listaProdutos = []
 produto = []
 
@@ -14,8 +16,12 @@ def cadastrarProdutos():
 
     fornecedorProduto = str(input("Digite o fornecedor do produto: "))
     produto.append(fornecedorProduto)
+    if fornecedorProduto not in cadastro_fornecedores.listaFornecedores:
+        cadastro_fornecedores.listaFornecedores.append(fornecedorProduto)
+        print(f"{fornecedorProduto} acabou de ser cadastrado. Seguindo...")
 
-    listaProdutos.append(produto)
+    listaProdutos.append(produto[:])
+    produto.clear()
 
 def consultarProdutos():
     print(30 * "==")

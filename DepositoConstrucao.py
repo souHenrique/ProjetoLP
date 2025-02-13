@@ -68,6 +68,7 @@ while True:
                     print(10 * "==", "CADASTRO DE FORNECEDORES", 10 * "==")
                     print("1. Adicionar;\n2. Consultar;\n3. Alterar;\n4. Excluir;\n5. Voltar ao Menu de Cadastros;")
                     cadastroFornecedores = int(input("Selecione a sua opção: "))
+                    print(30 * "==")
 
                     if cadastroFornecedores == 1:
                         cadastro_fornecedores.cadastrarFornecedores()
@@ -112,15 +113,22 @@ while True:
                 break
 
     elif menuPrincipal == 3:
-        print(10 * "==", "RELATÓRIO", 10 * "==")
-        print("1 - FORNECEDORES: \n2 - VENDAS: \n3 - SAIDA DE PRODUTOS: Ranque de saida dos produtos durante as vendas")
-        menuRelatorio = int(input("Digite a sua opção: "))
+        while True:
+            print(10 * "==", "RELATÓRIO", 10 * "==")
+            print("1 - Fornecedores: \n2 - Vendas: \n3 - Produtos:\n4 - Voltar ao menu principal;")
+            menuRelatorio = int(input("Digite a sua opção: "))
 
-        if menuRelatorio == 1:
-            relatorios.relatorioFornecedores()
+            if menuRelatorio == 1:
+                relatorios.relatorioFornecedores()
 
-        if menuRelatorio == 2:
-            relatorios.relatorioVendas()
+            elif menuRelatorio == 2:
+                relatorios.relatorioVendas()
+
+            elif menuRelatorio == 3:
+                relatorios.relatorioProdutos()
+
+            elif menuRelatorio == 4:
+                break
 
     #Quebra o loop do MENU
     elif menuPrincipal == 4:

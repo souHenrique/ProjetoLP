@@ -1,5 +1,6 @@
 import cadastro_clientes
 import cadastro_produtos
+import cadastro_fornecedores
 
 item_comprado = []
 resumo_venda = []
@@ -7,6 +8,7 @@ valor_total_venda = []
 
 vendasRealizadas = []
 vendasFornecedores = []
+vendasProdutos = []
 
 def verificarClienteVenda():
     global nome_cliente_venda
@@ -62,8 +64,12 @@ def adicionaPedido():
 
         fornecedorProduto = str(input("Digite o nome do fornecedor do produto: "))
         cadastro_produtos.produto.append(fornecedorProduto)
+        if fornecedorProduto not in cadastro_fornecedores.listaFornecedores:
+            cadastro_fornecedores.listaFornecedores.append(fornecedorProduto)
+            print(f"{fornecedorProduto} acabou de ser cadastrado. Seguindo...")
 
-        cadastro_produtos.listaProdutos.append(cadastro_produtos.produto)
+        cadastro_produtos.listaProdutos.append(cadastro_produtos.produto[:])
+        cadastro_produtos.produto.clear()
 
         print("Cadastro realizado com sucesso.")
 
@@ -119,6 +125,7 @@ def finalizaCompra():
 
     for pos, venda in enumerate(resumo_venda):
         vendasFornecedores.append(venda[3])
+        vendasProdutos.append(venda[0])
 
     vendasRealizadas.append(valor_total_venda[:])
     valor_total_venda.clear()
