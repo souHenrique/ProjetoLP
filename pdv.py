@@ -31,7 +31,6 @@ def adicionaPedido():
     nome_produto_venda = input("Digite o produto: ")
     quantidade_produto_venda = int(input("Digite a quantidade: "))
 
-    #Se o item já estiver cadastrado, apenas adiciona na venda
     for prod in cadastro_produtos.listaProdutos:
         if nome_produto_venda == prod[0]:
             produto_encontrado = True
@@ -49,7 +48,6 @@ def adicionaPedido():
             print("Produto adicionado ao carrinho com sucesso.")
             break
 
-    #Se o item não estiver cadastrado, realiza o cadastro dele e adiciona na venda
     if not produto_encontrado:
 
         print("O produto digitado não está cadastrado.")
