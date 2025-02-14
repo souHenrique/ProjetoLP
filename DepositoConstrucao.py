@@ -87,12 +87,10 @@ while True:
 
                     else:
                         print("Opção inválida, tente novamente.")
-
-                #Quebra o loop dos CADASTROS
+                        
                 elif menuCadastro == 4:
                     break
-
-            #Impede que o programa fique preso no loop, quebrando o menu de cadastros
+                    
             if menuCadastro == 4:
                 break
 
@@ -129,8 +127,7 @@ while True:
 
             elif menuRelatorio == 4:
                 break
-
-    #Quebra o loop do MENU
+                
     elif menuPrincipal == 4:
         print("PROGRAMA ENCERRADO...")
         break
